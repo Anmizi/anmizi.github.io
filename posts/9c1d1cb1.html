@@ -251,7 +251,6 @@
 <p>.box{display: flex | inline-flex} </p>
 <h3 id="什么是flex项目-flex-item"><a href="#什么是flex项目-flex-item" class="headerlink" title="什么是flex项目(flex item)"></a>什么是flex项目(flex item)</h3><p>flex容器的所有子元素自动成为容器成员，称为flex项目</p>
 <p>项目默认沿主轴排列</p>
-<p><img src="http://mark-imges.test.upcdn.net/images/bg2015071004.png" srcset="/img/loading.gif" alt="img"></p>
 <h2 id="容器属性"><a href="#容器属性" class="headerlink" title="容器属性"></a>容器属性</h2><h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><ul>
 <li>flex    容器为块级元素特性，占一行</li>
 <li>inline-flex   容器为行内块元素特性，宽度被flex项目撑开</li>
@@ -283,7 +282,8 @@
 <h3 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h3><p><span style="background:pink;color:#333">justify-content</span> 属性定义了项目在主轴上的对齐方式</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.box</span>&#123;<br>    <span class="hljs-attribute">justify-content</span>: flex-start | flex-end | center | space-between | space-around;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p><img src="http://mark-imges.test.upcdn.net/images/bg2015071010.png" srcset="/img/loading.gif" alt="img"></p>
+
+
 <p>它可能取5个值，具体对齐方式与轴的方向有关。下面假设主轴为从左到右。</p>
 <ul>
 <li><code>flex-start</code>（默认值）：左对齐</li>
@@ -295,7 +295,7 @@
 <h3 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h3><p><span style="background:pink;color:#333">align-items</span> 属性定义项目在<strong>交叉轴</strong>上如何对齐</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.box</span>&#123;<br>    <span class="hljs-attribute">align-items</span>: flex-start | flex-end | center | baseline | stretch;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p><img src="http://mark-imges.test.upcdn.net/images/bg2015071011.png" srcset="/img/loading.gif" alt="img"></p>
+
 <p>它可能取5个值。具体的对齐方式与交叉轴的方向有关，下面假设交叉轴从上到下</p>
 <ul>
 <li><code>flex-start</code>：交叉轴的起点对齐。</li>
@@ -307,7 +307,8 @@
 <h3 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h3><p>align-content 属性定义了多根轴线(主轴线)的对齐方式，如果项目只有一跟轴线，该属性不起作用。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.box</span>&#123;<br>    <span class="hljs-attribute">align-content</span>: flex-start | flex-end | center | space-between | space-around;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p><img src="http://mark-imges.test.upcdn.net/images/bg2015071012.png" srcset="/img/loading.gif" alt="img"></p>
+
+
 <p>该属性可能取6个值。</p>
 <ul>
 <li><code>flex-start</code>：与交叉轴的起点对齐。</li>
@@ -341,7 +342,8 @@
 <h3 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h3><p><span style="background:pink;color:#333">align-self</span>属性允许单个项目有与其他项目不一样的对齐方式，可覆盖<code>align-items</code>属性。默认值为<code>auto</code>，表示继承父元素的<code>align-items</code>属性，如果没有父元素，则等同于<code>stretch</code>。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;<br>  <span class="hljs-attribute">align-self</span>: auto | flex-start | flex-end | center | baseline | stretch;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p><img src="http://mark-imges.test.upcdn.net/images/bg2015071016.png" srcset="/img/loading.gif" alt="img"></p>
+
+
 <p>该属性可能取6个值，除了auto，其他都与align-items属性完全一致。</p>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html">阮一峰Flex布局教程语法篇</a></p>
 
@@ -484,7 +486,7 @@
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"  style="display:block; overflow:hidden; width:80px; margin: 0 auto; " > <img src="/images/yplogo.png" srcset="/img/loading.gif" style="width:100%;border-radius:8px"> </a> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
   
   <div class="statistics">

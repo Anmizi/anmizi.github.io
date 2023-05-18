@@ -253,8 +253,6 @@
 <li>非空右子树的所有键值大于其根节点的键值</li>
 <li>左右子树都是二叉搜索树</li>
 </ol>
-<p><img src="http://mark-imges.test.upcdn.net/images/20201205163345.png" srcset="/img/loading.gif" alt="二叉查找树特别函数"></p>
-<p><img src="http://mark-imges.test.upcdn.net/images/20201205163642.png" srcset="/img/loading.gif" alt="查找操作"></p>
 <h2 id="二叉搜索树的查找操作Find"><a href="#二叉搜索树的查找操作Find" class="headerlink" title="二叉搜索树的查找操作Find"></a>二叉搜索树的查找操作Find</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">Position <span class="hljs-title">Find</span><span class="hljs-params">(ElementType X,BinTree BST)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(!BST) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<span class="hljs-comment">//查找失败</span><br>    <span class="hljs-keyword">if</span>(X&gt;BST-&gt;Data)<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Find</span>(X,BST-&gt;Right);<span class="hljs-comment">//在右子树中继续查找</span><br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(X&lt;BST-&gt;Data)<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Find</span>(X,BST-&gt;Left);<span class="hljs-comment">//在左子树中继续查找</span><br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">return</span> BST;<span class="hljs-comment">//查找成功，返回节点的地址</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>由于<em>非递归函数</em>的执行效率高，可将”尾递归”函数改为<em>迭代函数</em></p>
@@ -412,7 +410,7 @@
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"  style="display:block; overflow:hidden; width:80px; margin: 0 auto; " > <img src="/images/yplogo.png" srcset="/img/loading.gif" style="width:100%;border-radius:8px"> </a> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
   
   <div class="statistics">
