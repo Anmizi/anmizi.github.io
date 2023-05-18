@@ -1,0 +1,1041 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" href="/images/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="破壁人">
+  <meta name="keywords" content="前端,js,css,html,博客,分享,科技">
+  <title>计算机网络之网络应用 - 破壁人的小站</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"anmizi.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>破壁人的小站</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="计算机网络之网络应用">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      破壁人
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-28 17:03" pubdate>
+        2021年7月28日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      33
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">计算机网络之网络应用</h1>
+            
+            <div class="markdown-body">
+              <h3 id="网络应用体系结构"><a href="#网络应用体系结构" class="headerlink" title="网络应用体系结构"></a>网络应用体系结构</h3><ul>
+<li><p>客户即/服务器结构(Client-Server,C/S)</p>
+</li>
+<li><p>点对点结构(Peer-to-Peer, P2P)</p>
+</li>
+<li><p>混合结构(Hybrid)</p>
+</li>
+</ul>
+<h4 id="客户机-服务器结构"><a href="#客户机-服务器结构" class="headerlink" title="客户机/服务器结构"></a>客户机/服务器结构</h4><p>服务器</p>
+<ul>
+<li><strong>7*24小时提供服务</strong></li>
+<li><strong>永久性访问地址/域名</strong></li>
+<li>利用大量服务器实现可拓展性</li>
+</ul>
+<p>客户机</p>
+<ul>
+<li>与服务器通信，使用服务器提供的服务</li>
+<li><strong>间歇性接入网络</strong></li>
+<li><strong>可能使用动态IP地址</strong></li>
+<li>不会与其他客户机直接通信</li>
+</ul>
+<p><img src="http://mark-imges.test.upcdn.net/images/20210724165115.png" srcset="/img/loading.gif"></p>
+<h4 id="纯P2P结构"><a href="#纯P2P结构" class="headerlink" title="纯P2P结构"></a>纯P2P结构</h4><ul>
+<li>没有永远在线的服务器</li>
+<li>任意端系统/节点之间可以直接通讯</li>
+<li>节点间歇息接入网络</li>
+<li>节点可能改变IP地址</li>
+</ul>
+<p>优点：<font color=red>高度可伸缩</font></p>
+<p>缺点：<font color=red>难于管理</font></p>
+<h4 id="混合结构"><a href="#混合结构" class="headerlink" title="混合结构"></a>混合结构</h4><p>混合结构的例子：</p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Napster/731754?fr=aladdin">Napster</a></p>
+<ul>
+<li>文件传输采用P2P结构</li>
+<li>文件的搜索采用C/S结构 - 集中式<ul>
+<li>每个节点向中央服务器登记自己的内容</li>
+<li>每个节点向中央服务器提交查询请求，查找感兴趣的内容</li>
+</ul>
+</li>
+</ul>
+<h3 id="网络应用进程通信"><a href="#网络应用进程通信" class="headerlink" title="网络应用进程通信"></a>网络应用进程通信</h3><p>进程：</p>
+<ul>
+<li>主机上运行的程序</li>
+</ul>
+<p>同一主机运行的进行之间如何通信：</p>
+<ul>
+<li>进程间通信机制</li>
+<li>操作系统提供</li>
+</ul>
+<p>不同主机运行的进程间如何通信</p>
+<ul>
+<li><font color=red>消息交换(报文交换)</font></li>
+</ul>
+<p>客户机进程：发起通信的进程</p>
+<p>服务器进行：等待通信请求的进行</p>
+<h4 id="套接字Socket"><a href="#套接字Socket" class="headerlink" title="套接字Socket"></a>套接字Socket</h4><p>进程间通信利用socket发送/接收消息实现</p>
+<p>类似于寄信</p>
+<ul>
+<li>发送方将消息送到门外邮箱</li>
+<li>发送方依赖门外的传输设备将消息传到接收方所在主机，并送到接收方的门外</li>
+<li>接收方从门外获取消息</li>
+</ul>
+<p>传输基础设施向进程提供API</p>
+<ul>
+<li>传输协议的选择</li>
+<li>参数的设置</li>
+</ul>
+<p>如何寻址进程？</p>
+<p>不同主机的进程间通信，那么每个进程必须拥有<strong>标识符</strong></p>
+<p>如何寻址主机？ <font color=red>IP地址</font></p>
+<p>Q: 主机有了IP地址后，是否足以定位进程？</p>
+<p>A: 否，同一主机可能同时有多个进程需要通信。</p>
+<p><font color=red>端口号/Port number</font></p>
+<ul>
+<li>为主机上每个需要通信的进程分配一个端口号</li>
+<li>HTTP Server: 80</li>
+<li>Mail Server: 25</li>
+</ul>
+<p>进程的标识符</p>
+<ul>
+<li>IP地址+端口号</li>
+</ul>
+<h4 id="应用层协议"><a href="#应用层协议" class="headerlink" title="应用层协议"></a>应用层协议</h4><p>网络应用需遵循应用层协议</p>
+<p>公开协议</p>
+<ul>
+<li>由RFC(Request For Comments)定义</li>
+<li>允许互操作</li>
+<li>HTTP, SMTP, ……</li>
+</ul>
+<p>私有协议</p>
+<ul>
+<li>多数p2p文件共享应用</li>
+</ul>
+<p>应用层协议的内容</p>
+<p>消息的类型(type)</p>
+<ul>
+<li>请求消息</li>
+<li>响应消息</li>
+</ul>
+<p>消息的语法(Syntax)格式</p>
+<ul>
+<li>消息中有哪些字段(field)?</li>
+<li>每个字段如何描述</li>
+</ul>
+<p>字段的语义(semantics)</p>
+<ul>
+<li>字段中消息的含义</li>
+</ul>
+<p>规则(rules)</p>
+<ul>
+<li>进程何时发送/响应消息</li>
+<li>进程如何发送/响应消息</li>
+</ul>
+<h3 id="网络应用对传输服务的需求"><a href="#网络应用对传输服务的需求" class="headerlink" title="网络应用对传输服务的需求"></a>网络应用对传输服务的需求</h3><p>数据丢失(data loss)/可靠性(reliability)</p>
+<ul>
+<li>某些网络应用能够容忍一定的数据丢失：网络电话</li>
+<li>某些网络应用要求100%可靠的数据传输：文件传输，telnet</li>
+</ul>
+<p>时间(timing)/延迟(delay)</p>
+<ul>
+<li>有些应用只有在延迟足够低时才能”有效”</li>
+<li>网络电话/网络游戏</li>
+</ul>
+<p>带宽</p>
+<ul>
+<li>某些应用只有在带宽达到最低要求时才”有效”：网络视频</li>
+<li>某些应用能够适应任何带宽 弹性应用：email</li>
+</ul>
+<h4 id="Internet提供的传输服务"><a href="#Internet提供的传输服务" class="headerlink" title="Internet提供的传输服务"></a>Internet提供的传输服务</h4><p>TCP服务</p>
+<ul>
+<li>面向连接：客户机/服务器进程间需要建立连接</li>
+<li>可靠的传输</li>
+<li>流量控制：发送方不会发送速度过快，超过接收方的处理能力</li>
+<li>拥塞控制：当网络负载过重时能够限制发送方的发送速度</li>
+<li>不提供时间/延迟保障</li>
+<li>不提供最小带宽保障</li>
+</ul>
+<p>UDP服务</p>
+<ul>
+<li><p>无连接</p>
+</li>
+<li><p>不可靠的数据传输</p>
+</li>
+<li><p>不提供：</p>
+<ul>
+<li>可靠性保障</li>
+<li>流量控制</li>
+<li>拥塞控制</li>
+<li>延迟保障</li>
+<li>带宽保障</li>
+</ul>
+</li>
+</ul>
+<h3 id="Web应用"><a href="#Web应用" class="headerlink" title="Web应用"></a>Web应用</h3><p>World Wide Web:    Tim Berners-Lee</p>
+<ul>
+<li>网页</li>
+<li>网页互相链接</li>
+</ul>
+<p>网页包含多个对象</p>
+<ul>
+<li>对象：html文件，jpeg文件，视频文件，动态脚本</li>
+<li>基本html文件：包含对其他对象引用的链接</li>
+</ul>
+<p>对象的寻址(addressing)</p>
+<ul>
+<li><p><font color=red>URL(Uniform Resourse Locator)</font>:    <strong>统一资源定位器</strong></p>
+</li>
+<li><p><font color=red>Scheme://host:port/path</font></p>
+</li>
+</ul>
+<h4 id="HTTP协议概述"><a href="#HTTP协议概述" class="headerlink" title="HTTP协议概述"></a>HTTP协议概述</h4><p>万维网应用遵循什么协议？</p>
+<p>超文本传输协议</p>
+<ul>
+<li><font color=red>HyperText Transfer Protocol</font></li>
+</ul>
+<p>C/S结构</p>
+<ul>
+<li>客户-Brower:    请求，接收，展示web对象</li>
+<li>服务器-Web Server： 响应客户的请求，发送对象</li>
+</ul>
+<p>HTTP版本：</p>
+<ul>
+<li>1.0    RFC 1945</li>
+<li>1.1    RFC 2068</li>
+</ul>
+<p>使用TCP传输服务</p>
+<ul>
+<li>服务器在80端口等待客户的请求</li>
+<li>浏览器发起到服务器的TCP连接请求(创建套接字Socket)</li>
+<li>服务器接受来自浏览器的TCP连接</li>
+<li>浏览器(HTTP客户端)与Web服务器(HTTP服务器)交换HTTP消息</li>
+<li>关闭TCP连接</li>
+</ul>
+<p><strong>无状态(stateless)</strong></p>
+<ul>
+<li><font color=red>服务器不维护任何有关客户端过去所请求的信息</font></li>
+</ul>
+<h4 id="HTTP连接的两种类型"><a href="#HTTP连接的两种类型" class="headerlink" title="HTTP连接的两种类型"></a>HTTP连接的两种类型</h4><p><font color=red>非持久化连接(Nonpersistent HTTP)</font></p>
+<ul>
+<li>每个TCP连接最多允许传输<strong>一个</strong>对象</li>
+<li>HTTP1.0版本使用非持久化连接</li>
+</ul>
+<p><font color=red>持久化连接(Persistent HTTP)</font></p>
+<ul>
+<li>每个TCP连接允许传输<strong>多个</strong>对象</li>
+<li>HTTP1.1版本默认使用持久化连接</li>
+</ul>
+<p>非持久性连接的问题</p>
+<ul>
+<li>每个对象需要两个RTT</li>
+<li>操作系统需要为每个TCP连接开销资源</li>
+<li>浏览器会怎么做<ul>
+<li>打开多个并行的TCP连接以获取网页所需对象</li>
+<li>给服务器端造成什么影响</li>
+</ul>
+</li>
+</ul>
+<p>持久性连接</p>
+<ul>
+<li>发送响应后，服务器保持TCP连接的打开</li>
+<li>后续的HTTP消息可以通过这个连接发送</li>
+</ul>
+<p>无流水的持久性连接</p>
+<ul>
+<li>客户端只有收到前一个响应后才发送新的请求</li>
+<li>每个被引用的对象耗时1个RTT</li>
+</ul>
+<p>带有流水机制的持久性连接</p>
+<ul>
+<li>HTTP1.1的默认选项</li>
+<li>客户端只要遇到一个引用对象就尽快发出请求</li>
+<li>理想情况下，收到所有的引用对象只需要耗时一个RTT</li>
+</ul>
+<h4 id="HTTP协议消息格式"><a href="#HTTP协议消息格式" class="headerlink" title="HTTP协议消息格式"></a>HTTP协议消息格式</h4><p>HTTP协议有两类消息</p>
+<ul>
+<li>请求消息(request)</li>
+<li>响应消息(response)</li>
+</ul>
+<p>请求消息</p>
+<ul>
+<li>ASCII：人直接可读</li>
+</ul>
+<p><font color=red>HTTP请求消息的通用格式</font></p>
+<p><img src="http://mark-imges.test.upcdn.net/images/20210725140607.png" srcset="/img/loading.gif"></p>
+<p>上传输入的方式</p>
+<ul>
+<li><font color=red>POST方法</font><ul>
+<li>网页经常需要填写表格(form)</li>
+<li>在请求消息的消息体(entity body)中上传客户端的输入</li>
+</ul>
+</li>
+<li><font color=red>URL方法</font><ul>
+<li><font color=red>使用GET方法</font></li>
+<li>输入信息通过request行的URL字段上传</li>
+</ul>
+</li>
+</ul>
+<p>方法的类型</p>
+<p>HTTP/1.0</p>
+<ul>
+<li>GET</li>
+<li>POST</li>
+<li>HEAD<ul>
+<li>请Server不要将所请求的对象放入响应消息中</li>
+</ul>
+</li>
+</ul>
+<p><font color=red>HTTP/1.1</font></p>
+<ul>
+<li>GET,POST,HEAD</li>
+<li>PUT<ul>
+<li>将消息体中的文件上传到URL字段所指定的路径</li>
+</ul>
+</li>
+<li>DELETE<ul>
+<li>删除URL字段所指定的文件</li>
+</ul>
+</li>
+</ul>
+<p>HTTP响应消息</p>
+<p><img src="http://mark-imges.test.upcdn.net/images/20210725141802.png" srcset="/img/loading.gif"></p>
+<p>HTTP响应状态代码</p>
+<ul>
+<li>响应消息的第一行</li>
+<li>示例<ul>
+<li>200 OK</li>
+<li>301 Moved Permanently</li>
+<li>400 Bad Request</li>
+<li>404 Not Found</li>
+<li>505 HTTP Version Not Supported</li>
+</ul>
+</li>
+</ul>
+<h4 id="Cookie技术"><a href="#Cookie技术" class="headerlink" title="Cookie技术"></a>Cookie技术</h4><p>某些网站为了辨别用户身份，进行session跟踪而存储在用户本地终端上的数据(通常是经过加密的)</p>
+<p>Cookie的组件</p>
+<ul>
+<li>HTTP响应消息的cookie头部行</li>
+<li>HTTP请求消息的cookie头部行</li>
+<li>保存在客户端主机上的cookie文件，由浏览器管理</li>
+<li>Web服务器的后台数据库</li>
+</ul>
+<p>Cookie的作用</p>
+<ul>
+<li>身份认证</li>
+<li>购物车</li>
+<li>推荐</li>
+<li>Web e-mail</li>
+<li>……</li>
+</ul>
+<p>隐私问题</p>
+<h4 id="Web缓存-代理服务器技术"><a href="#Web缓存-代理服务器技术" class="headerlink" title="Web缓存/代理服务器技术"></a>Web缓存/代理服务器技术</h4><p>功能</p>
+<ul>
+<li>在不访问服务器的前提下满足客户端的HTTP请求</li>
+</ul>
+<p>为什么发明这种技术？</p>
+<ul>
+<li><font color=red>缩短客户请求的响应时间</font></li>
+<li><font color=red>减少机构/组织的流量</font></li>
+<li><font color=red>在大范围内(Internet)实现有效的内容分发</font></li>
+</ul>
+<p>Web缓存/代理服务器</p>
+<ul>
+<li>用户设定浏览器通过缓存进行Web访问</li>
+<li>浏览器向缓存/代理服务器发送所有的HTTP请求<ul>
+<li><strong>如果所请求对象在缓存中，缓存返回对象</strong></li>
+<li><strong>否则，缓存服务器向原始服务器发送HTTP请求，获取对象，然后返回给客户端并保存对象</strong></li>
+</ul>
+</li>
+<li>缓存即充当客户端，也充当服务器</li>
+<li>一般由ISP(Internet服务提供商)架设</li>
+</ul>
+<h3 id="Email应用"><a href="#Email应用" class="headerlink" title="Email应用"></a>Email应用</h3><h4 id="Email应用的构成组件"><a href="#Email应用的构成组件" class="headerlink" title="Email应用的构成组件"></a>Email应用的构成组件</h4><ul>
+<li>邮件客户端(user agent)</li>
+<li>邮件服务器</li>
+<li><strong>SMTP协议(Simple Mail Transfer Protocol)</strong></li>
+</ul>
+<p>邮件客户端</p>
+<ul>
+<li>读，写Email信息</li>
+<li>与服务器交互，收，发Email信息</li>
+<li>Outlook，Foxmail，Thunderbird</li>
+<li>Web客户端</li>
+</ul>
+<p>邮件服务器(Mail Server)</p>
+<ul>
+<li>邮箱：存储发给该用户的Email</li>
+<li>消息队列(message queue)：存储等待发送的Email</li>
+</ul>
+<p>SMTP协议</p>
+<ul>
+<li>邮箱服务器之间传递消息所使用的协议</li>
+<li>客户端：发送消息的服务器</li>
+<li>服务器：接收消息的服务器</li>
+</ul>
+<h4 id="SMTP协议"><a href="#SMTP协议" class="headerlink" title="SMTP协议"></a>SMTP协议</h4><ul>
+<li>使用TCP进行email消息的可靠传输</li>
+<li>端口25</li>
+<li>传输过程的三个阶段<ul>
+<li>握手</li>
+<li>消息的传输</li>
+<li>关闭</li>
+</ul>
+</li>
+<li>命令/响应交互模式<ul>
+<li><font color=red>命令(command)：ASCII文本</font></li>
+<li><font color=red>响应(response)：状态代码和语句</font></li>
+</ul>
+</li>
+<li>Email消息只能包含7位ASCII码</li>
+<li>使用持久性连接</li>
+<li>要求消息必须由7位ASCII码构成</li>
+<li>SMTP服务器利用CRLF.CRLF确定消息的结束</li>
+</ul>
+<h4 id="Email消息格式"><a href="#Email消息格式" class="headerlink" title="Email消息格式"></a>Email消息格式</h4><p>文本消息格式标准</p>
+<ul>
+<li>同步行<ul>
+<li>To</li>
+<li>From</li>
+<li>Subject</li>
+</ul>
+</li>
+<li>消息体(body)<ul>
+<li>消息本身</li>
+<li>只能是ASCII字符</li>
+</ul>
+</li>
+</ul>
+<p>MIME：多媒体邮件扩展</p>
+<ul>
+<li>通过在邮件头部增加额外的行以声明MIME的内容类型</li>
+</ul>
+<h4 id="邮件访问协议"><a href="#邮件访问协议" class="headerlink" title="邮件访问协议"></a>邮件访问协议</h4><p>邮件访问协议：从服务器获取邮件</p>
+<ul>
+<li>POP：Post Office Protocol<ul>
+<li>认证/授权(客户端&lt;-&gt;服务器)和下载</li>
+</ul>
+</li>
+<li>IMAP：Internet Mail Access Protocol<ul>
+<li>更多功能</li>
+<li>更加复杂</li>
+<li>能够操作服务器上存储的消息</li>
+</ul>
+</li>
+<li>HTTP：163，QQ Mail等</li>
+</ul>
+<h4 id="POP协议"><a href="#POP协议" class="headerlink" title="POP协议"></a>POP协议</h4><p>认证过程</p>
+<ul>
+<li>客户端命令<ul>
+<li>User：声明用户名</li>
+<li>Pass：声明密码</li>
+</ul>
+</li>
+<li>服务器响应<ul>
+<li>+OK</li>
+<li>-ERR</li>
+</ul>
+</li>
+</ul>
+<p>事务阶段</p>
+<ul>
+<li>List：列出消息数量</li>
+<li>Retr：用编号获取消息</li>
+<li>Dele：删除消息</li>
+<li>Quit</li>
+</ul>
+<p>“下载并删除”模式</p>
+<ul>
+<li>用户如果换了客户端软件，无法重读该邮件</li>
+</ul>
+<p>“下载并保持”模式</p>
+<ul>
+<li>不同客户端可以保存消息的拷贝</li>
+</ul>
+<p>POP协议是无状态的</p>
+<h4 id="IMAP协议"><a href="#IMAP协议" class="headerlink" title="IMAP协议"></a>IMAP协议</h4><p><strong>所以消息统一保存在一个地方：服务器</strong></p>
+<p>允许用户利用文件夹组织消息</p>
+<p>IMAP支持跨会话(Session)的用户状态：</p>
+<ul>
+<li>文件夹的名字</li>
+<li>文件夹与消息ID之间的映射等</li>
+</ul>
+<h3 id="DNS应用"><a href="#DNS应用" class="headerlink" title="DNS应用"></a>DNS应用</h3><h4 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS:    Domain Name System"></a>DNS:    Domain Name System</h4><p>Internet上主机/路由器的识别问题</p>
+<ul>
+<li>IP地址</li>
+<li>域名：<a target="_blank" rel="noopener" href="http://www.hit.edu.cn/">www.hit.edu.cn</a></li>
+</ul>
+<p>域名解析系统DNS</p>
+<ul>
+<li>多层命名服务器构成的分布式数据库</li>
+<li>应用层协议：完成名字的解析<ul>
+<li>Internet核心功能，用应用层协议实现</li>
+<li>网络边界复杂</li>
+</ul>
+</li>
+</ul>
+<p>DNS服务</p>
+<ul>
+<li>域名向IP地址的翻译</li>
+<li>主机别名</li>
+<li>邮件服务器别名</li>
+<li>负载均衡：web服务器</li>
+</ul>
+<h4 id="DNS根域名服务器"><a href="#DNS根域名服务器" class="headerlink" title="DNS根域名服务器"></a>DNS根域名服务器</h4><p>本地域名解析服务无法解析域名时，方位根域名服务器</p>
+<p>根域名服务器</p>
+<ul>
+<li>如果不知道映射，访问权威域名服务器</li>
+<li>获得映射</li>
+<li>向本地域名服务器返回映射</li>
+</ul>
+<h4 id="TLD和权威域名解析服务器"><a href="#TLD和权威域名解析服务器" class="headerlink" title="TLD和权威域名解析服务器"></a>TLD和权威域名解析服务器</h4><p>顶级域名服务器(TLD,top-level domain)：负责com,org,net,edu等顶级域名和国家顶级域名，例如cn,uk,fr等</p>
+<p>权威(Authoritative)域名服务器：组织的域名解析服务器，提供组织内部服务器的解析服务</p>
+<ul>
+<li>组织负责维护</li>
+<li>服务器提供商负责维护</li>
+</ul>
+<h4 id="本地域名解析服务器"><a href="#本地域名解析服务器" class="headerlink" title="本地域名解析服务器"></a>本地域名解析服务器</h4><p>不严格属性层级体系</p>
+<p>每个ISP有一个本地域名服务器</p>
+<ul>
+<li>默认域名解析服务器</li>
+</ul>
+<p>当主机进行DNS查询时，查询被发送到本地域名服务器</p>
+<ul>
+<li>作为代理(proxy)，将查询转发给(层级式)域名解析服务器系统</li>
+</ul>
+<h4 id="DNS记录"><a href="#DNS记录" class="headerlink" title="DNS记录"></a>DNS记录</h4><p>资源记录(RR,resource records)</p>
+<p>Type=A</p>
+<ul>
+<li>name：主机域名</li>
+<li>value：IP地址</li>
+</ul>
+<p>Type=NS</p>
+<ul>
+<li>name：域(edu.cn)</li>
+<li>value：该域权威域名解析服务器的主机域名</li>
+</ul>
+<p>Type=CNAME</p>
+<ul>
+<li>name：某一真实域名的别名</li>
+<li>value：真实域名</li>
+</ul>
+<p>Type=MX</p>
+<ul>
+<li>value是与name相对应的邮件服务器</li>
+</ul>
+<h4 id="DNS协议与消息格式"><a href="#DNS协议与消息格式" class="headerlink" title="DNS协议与消息格式"></a>DNS协议与消息格式</h4><p>DNS协议：</p>
+<ul>
+<li>查询(query)和回复(reply消息)</li>
+<li>消息格式相同</li>
+</ul>
+<p>消息头部</p>
+<ul>
+<li>Identification: 16位查询编号，回复使用相同的编号</li>
+<li>flags<ul>
+<li>查询或回复</li>
+<li>期望递归</li>
+<li>递归可以</li>
+<li>权威回答</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8/">计算机网络之网络应用</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/9c5f5996.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ES6之Set与Map</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/eabb124d.html">
+                        <span class="hidden-mobile">Javascript之Symbol类型</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "318k63s8cJRgAN920zz8Rd7w-gzGzoHsz",
+          app_key: "Eh7Uk7TMvw3Y5DbAzmIzIEYO",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "https://318k63s8.lc-cn-n1-shared.com",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"  style="display:block; overflow:hidden; width:80px; margin: 0 auto; " > <img src="/images/yplogo.png" srcset="/img/loading.gif" style="width:100%;border-radius:8px"> </a> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

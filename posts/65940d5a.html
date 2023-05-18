@@ -1,0 +1,568 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" href="/images/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="破壁人">
+  <meta name="keywords" content="前端,js,css,html,博客,分享,科技">
+  <title>Ajax - 破壁人的小站</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"anmizi.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>破壁人的小站</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Ajax">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      破壁人
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-25 15:02" pubdate>
+        2021年2月25日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Ajax</h1>
+            
+            <div class="markdown-body">
+              <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>AJAX</strong>即“<strong>Asynchronous JavaScript and XML</strong>”（异步的<a target="_blank" rel="noopener" href="https://www.wiki-wiki.top/baike-JavaScript">JavaScript</a>与<a target="_blank" rel="noopener" href="https://www.wiki-wiki.top/baike-XML">XML</a>技术），指的是一套综合了多项技术的<a target="_blank" rel="noopener" href="https://www.wiki-wiki.top/baike-%E7%80%8F%E8%A6%BD%E5%99%A8">浏览器</a>端<a target="_blank" rel="noopener" href="https://www.wiki-wiki.top/baike-%E7%B6%B2%E9%A0%81">网页</a>开发技术。</p>
+<p>传统的Web应用允许用户端填写表单（form），当提交表单时就向<a target="_blank" rel="noopener" href="https://www.wiki-wiki.top/baike-%E7%B6%B2%E9%A0%81%E4%BC%BA%E6%9C%8D%E5%99%A8">网页服务器</a>发送一个请求。服务器接收并处理传来的表单，然后送回一个新的网页，但这个做法浪费了许多带宽，因为在前后两个页面中的大部分<a target="_blank" rel="noopener" href="https://www.wiki-wiki.top/baike-HTML">HTML</a>码往往是相同的。由于每次应用的沟通都需要向服务器发送请求，应用的回应时间依赖于服务器的回应时间。这导致了用户界面的回应比本机应用慢得多</p>
+<p>AJAX应用可以仅向服务器发送并取回必须的数据，并在客户端采用JavaScript处理来自服务器的回应。因为在服务器和浏览器之间交换的数据大量减少，服务器回应更快了。同时，很多的处理工作可以在发出请求的<a target="_blank" rel="noopener" href="https://www.wiki-wiki.top/baike-%E5%AE%A2%E6%88%B7%E7%AB%AF">客户端</a>机器上完成，因此Web服务器的负荷也减少了。</p>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><p>用JavaScript写一个完整的AJAX代码并不复杂，但是需要注意：AJAX请求是异步执行的，也就是说，要通过回调函数获得响应。</p>
+<p>在现代浏览器上写AJAX主要依靠<code>XMLHttpRequest</code>对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> textarea = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;#res-text&#x27;</span>);<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">success</span>(<span class="hljs-params">text</span>)&#123;<br>    textarea.<span class="hljs-property">innerText</span> = text;<br>&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">fail</span>(<span class="hljs-params">text</span>)&#123;<br>    textarea.<span class="hljs-property">innerText</span> = <span class="hljs-string">&quot;Error code: &quot;</span> + text;<br>&#125;<br><span class="hljs-comment">// 新建xmlhttprequest对象</span><br><span class="hljs-keyword">var</span> xml = <span class="hljs-keyword">new</span> <span class="hljs-title class_">XMLHttpRequest</span>();<br><span class="hljs-comment">// 状态发生变化时，函数被回调</span><br>xml.<span class="hljs-property">onreadystatechange</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-keyword">if</span>(xml.<span class="hljs-property">readyState</span> === <span class="hljs-number">4</span>)&#123;<br>        <span class="hljs-keyword">if</span>(xml.<span class="hljs-property">status</span> === <span class="hljs-number">200</span>)&#123;<br>            <span class="hljs-comment">// 成功，通过responseText拿到响应的文本</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-title function_">success</span>(xml.<span class="hljs-property">responseText</span>);<br><br>        &#125;<br>    &#125;<span class="hljs-keyword">else</span>&#123;<br>        <span class="hljs-comment">// 失败，返回失败状态码</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-title function_">fail</span>(xml.<span class="hljs-property">status</span>);<br>    &#125;<br>&#125;<br><span class="hljs-comment">//发送请求</span><br><span class="hljs-comment">// 请求方式为Get,请求url为(一言接口)https://v1.hitokoto.cn</span><br><span class="hljs-comment">// get请求参数encode=text</span><br>xml.<span class="hljs-title function_">open</span>(<span class="hljs-string">&#x27;get&#x27;</span>,<span class="hljs-string">&#x27;https://v1.hitokoto.cn?encode=text&#x27;</span>,&#123;<br><br>&#125;);<br>xml.<span class="hljs-title function_">send</span>();<br></code></pre></td></tr></table></figure>
+
+<hr>
+
+<p>XmlHttpRequest对象在不同浏览器中不同的创建方法，以下是跨浏览器的通用方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// Provide the XMLHttpRequest class for IE 5.x-6.x:</span><br><span class="hljs-comment">// Other browsers (including IE 7.x-8.x) ignore this</span><br><span class="hljs-comment">//   when XMLHttpRequest is predefined</span><br><span class="hljs-keyword">var</span> xmlHttp;<br><span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-title class_">XMLHttpRequest</span> != <span class="hljs-string">&quot;undefined&quot;</span>) &#123;<br>    xmlHttp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">XMLHttpRequest</span>();<br>&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">window</span>.<span class="hljs-property">ActiveXObject</span>) &#123;<br>    <span class="hljs-keyword">var</span> aVersions = [<span class="hljs-string">&quot;Msxml2.XMLHttp.5.0&quot;</span>, <span class="hljs-string">&quot;Msxml2.XMLHttp.4.0&quot;</span>, <span class="hljs-string">&quot;Msxml2.XMLHttp.3.0&quot;</span>, <span class="hljs-string">&quot;Msxml2.XMLHttp&quot;</span>, <span class="hljs-string">&quot;Microsoft.XMLHttp&quot;</span>];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; aVersions.<span class="hljs-property">length</span>; i++) &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            xmlHttp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ActiveXObject</span>(aVersions[i]);<br>            <span class="hljs-keyword">break</span>;<br>        &#125; <span class="hljs-keyword">catch</span> (e) &#123;&#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>当创建了<code>XMLHttpRequest</code>对象后，要先设置<code>onreadystatechange</code>的回调函数。在回调函数中，通常我们只需通过<code>readyState === 4</code>判断请求是否完成，如果已完成，再根据<code>status === 200</code>判断是否是一个成功的响应。</p>
+<p><code>XMLHttpRequest</code>对象的<code>open()</code>方法有3个参数，第一个参数指定是<code>GET</code>还是<code>POST</code>，第二个参数指定URL地址，第三个参数指定是否使用异步，默认是<code>true</code>，所以不用写。</p>
+<p><em>注意</em>，千万不要把第三个参数指定为<code>false</code>，否则浏览器将停止响应，直到AJAX请求完成。如果这个请求耗时10秒，那么10秒内你会发现浏览器处于“假死”状态。</p>
+<p>最后调用<code>send()</code>方法才真正发送请求。<code>GET</code>请求不需要参数，<code>POST</code>请求需要把body部分以字符串或者<code>FormData</code>对象传进去。</p>
+<hr>
+
+
+
+<h2 id="安全限制"><a href="#安全限制" class="headerlink" title="安全限制"></a>安全限制</h2><p><font color=red>因为浏览器的同源策略，默认情况下，JavaScript在发送AJAX请求时，URL的域名必须和当前页面完全一致。</font>（否则会出现错误）</p>
+<p>完全一致的意思是，域名要相同（<code>www.example.com</code>和<code>example.com</code>不同），协议要相同（<code>http</code>和<code>https</code>不同），端口号要相同（默认是<code>:80</code>端口，它和<code>:8080</code>就不同）。有的浏览器口子松一点，允许端口不同，大多数浏览器都会严格遵守这个限制。</p>
+<h2 id="跨域访问"><a href="#跨域访问" class="headerlink" title="跨域访问"></a>跨域访问</h2><p>第一种：</p>
+<p>JSONP，它有个限制，只能用GET请求，并且要求返回JavaScript。这种方式跨域实际上是利用了浏览器允许跨域引用JavaScript资源</p>
+<p>第二种：CORS</p>
+<p>如果浏览器支持HTML5，那么就可以一劳永逸地使用新的跨域策略：CORS了。</p>
+<p>CORS全称Cross-Origin Resource Sharing，是HTML5规范定义的如何跨域访问资源。</p>
+<p>了解CORS前，我们先搞明白概念：</p>
+<p><strong>Origin</strong>表示本域，也就是浏览器当前页面的域。当JavaScript向外域（如sina.com）发起请求后，浏览器收到响应后，首先检查<code>Access-Control-Allow-Origin</code>是否包含本域，如果是，则此次跨域请求成功，如果不是，则请求失败，JavaScript将无法获取到响应的任何数据。</p>
+<p><img src="http://mark-imges.test.upcdn.net/images/20210303204619.png" srcset="/img/loading.gif" alt="js-cors"></p>
+<p>假设本域是<code>my.com</code>，外域是<code>sina.com</code>，只要响应头<code>Access-Control-Allow-Origin</code>为<code>http://my.com</code>，或者是<code>*</code>，本次请求就可以成功。</p>
+<p>可见，跨域能否成功，取决于对方服务器是否愿意给你设置一个正确的<code>Access-Control-Allow-Origin</code>，决定权始终在对方手中。</p>
+<p>上面这种跨域请求，称之为“简单请求”。简单请求包括GET、HEAD和POST（POST的Content-Type类型 仅限<code>application/x-www-form-urlencoded</code>、<code>multipart/form-data</code>和<code>text/plain</code>），并且不能出现任何自定义头（例如，<code>X-Custom: 12345</code>），通常能满足90%的需求。</p>
+<p>对于PUT、DELETE以及其他类型如<code>application/json</code>的POST请求，在发送AJAX请求之前，浏览器会先发送一个<code>OPTIONS</code>请求（称为preflighted请求）到这个URL上，询问目标服务器是否接受：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">OPTIONS</span> <span class="hljs-string">/path/to/resource</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>bar.com<br><span class="hljs-attribute">Origin</span><span class="hljs-punctuation">: </span>http://my.com<br><span class="hljs-attribute">Access-Control-Request-Method</span><span class="hljs-punctuation">: </span>POST<br></code></pre></td></tr></table></figure>
+
+<p>服务器必须响应并明确指出允许的Method：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-meta">HTTP/1.1</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Access-Control-Allow-Origin</span><span class="hljs-punctuation">: </span>http://my.com<br><span class="hljs-attribute">Access-Control-Allow-Methods</span><span class="hljs-punctuation">: </span>POST, GET, PUT, OPTIONS<br><span class="hljs-attribute">Access-Control-Max-Age</span><span class="hljs-punctuation">: </span>86400<br></code></pre></td></tr></table></figure>
+
+<p>浏览器确认服务器响应的<code>Access-Control-Allow-Methods</code>头确实包含将要发送的AJAX请求的Method，才会继续发送AJAX，否则，抛出一个错误。</p>
+<p>由于以<code>POST</code>、<code>PUT</code>方式传送JSON格式的数据在REST中很常见，所以要跨域正确处理<code>POST</code>和<code>PUT</code>请求，服务器端必须正确响应<code>OPTIONS</code>请求。</p>
+<h2 id="参考文档来源"><a href="#参考文档来源" class="headerlink" title="参考文档来源"></a>参考文档来源</h2><p><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1022910821149312/1023022332902400">廖雪峰Ajax教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.wiki-wiki.top/wiki/Ajax">维基百科Ajax</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Ajax/">Ajax</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/70752e5.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">移动基础之视口标签</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/c584aaaa.html">
+                        <span class="hidden-mobile">Javascript函数进阶</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "318k63s8cJRgAN920zz8Rd7w-gzGzoHsz",
+          app_key: "Eh7Uk7TMvw3Y5DbAzmIzIEYO",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "https://318k63s8.lc-cn-n1-shared.com",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"  style="display:block; overflow:hidden; width:80px; margin: 0 auto; " > <img src="/images/yplogo.png" srcset="/img/loading.gif" style="width:100%;border-radius:8px"> </a> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

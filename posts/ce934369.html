@@ -1,0 +1,665 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" href="/images/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="破壁人">
+  <meta name="keywords" content="前端,js,css,html,博客,分享,科技">
+  <title>正则表达式(Js) - 破壁人的小站</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"anmizi.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>破壁人的小站</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="正则表达式(Js)">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      破壁人
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-30 17:12" pubdate>
+        2020年5月30日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      52
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">正则表达式(Js)</h1>
+            
+            <div class="markdown-body">
+              <h3 id="什么是正则表达式"><a href="#什么是正则表达式" class="headerlink" title="什么是正则表达式"></a>什么是正则表达式</h3><p>正则表达式是表示搜索模式的特殊字符串。也被称为<code>&quot;regex&quot;</code>,<code>&quot;regexp&quot;</code>它们可以帮助程序员匹配、搜索和替换文本。</p>
+<span id="more"></span>
+
+<h3 id="使用测试方法"><a href="#使用测试方法" class="headerlink" title="使用测试方法"></a>使用测试方法</h3><p>测试正则表达式的一种方法是使用<code>.test()</code>方法。<code>.test()</code>方法会把你编写的正则表达式应用到一个字符串（即括号内的内容），如果你的匹配模式成功匹配到字符，则返回<code>true</code>，反之，返回<code>false</code>。如果你想在字符串<code>&quot;Hello,World&quot;</code>中匹配到<code>&quot;Hello&quot;</code>，可以使用如下正则表达式：<code>/Hello/</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> hi=<span class="hljs-string">&quot;Hello,World&quot;</span>;<br><span class="hljs-keyword">let</span> testRegex=<span class="hljs-regexp">/Hello/</span>;<br>testRegex.<span class="hljs-title function_">test</span>(hi);<span class="hljs-comment">//true</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="同时用多种模式匹配文字字符串"><a href="#同时用多种模式匹配文字字符串" class="headerlink" title="同时用多种模式匹配文字字符串"></a>同时用多种模式匹配文字字符串</h3><p>你可以使用<code>|</code>操作符来匹配多个规则,例如，你可以使用<code>/are|lucky|dog/</code>在字符串<code>&quot;You are a lucky dog&quot;</code>中匹配到字符串<code>are,lucky,dog</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;You are a lucky dog&quot;</span>;<br><span class="hljs-keyword">let</span> testRegex=<span class="hljs-regexp">/are|lucky|dog/</span>;<br>testRegex.<span class="hljs-title function_">test</span>(str);<span class="hljs-comment">//true</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="匹配时忽略大小写"><a href="#匹配时忽略大小写" class="headerlink" title="匹配时忽略大小写"></a>匹配时忽略大小写</h3><p>有时候，你可能也想匹配不同的英文字母大小写，这时我们可以在正则表达式<code>/</code>结尾加上忽略大小写标志<code>i</code>,如下示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;hello,world&quot;</span>;<br><span class="hljs-keyword">let</span> testRegex=<span class="hljs-regexp">/Hello,WoRld/i</span>;<br>testRegex.<span class="hljs-title function_">test</span>(str)<span class="hljs-comment">//true</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="提取匹配项"><a href="#提取匹配项" class="headerlink" title="提取匹配项"></a>提取匹配项</h3><p>到目前为止，你只是检查了一个匹配模式是否存在于字符串中。你还可以使用<code>.match()</code>方法来提取你找到的实际匹配项。请使用字符串来调用<code>.match()</code>方法，并在括号内传入正则表达式。以下是一个示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;hello,world&quot;</span>;<br><span class="hljs-keyword">let</span> testRegex=<span class="hljs-string">&quot;hello&quot;</span>;<br>str.<span class="hljs-title function_">match</span>(testRegex);<span class="hljs-comment">//return [&quot;hello&quot;]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="全局匹配"><a href="#全局匹配" class="headerlink" title="全局匹配"></a>全局匹配</h3><p>到目前为止，你只能提取或搜寻一次匹配模式。若要多次搜寻或提取匹配模式，你可以使用<code>g</code>标志。以下是一个示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;hello,hello,hello&quot;</span>;<br><span class="hljs-keyword">let</span> testRegex=<span class="hljs-regexp">/hello/g</span>;<br>str.<span class="hljs-title function_">match</span>(testRegex);<span class="hljs-comment">//Return [&quot;hello&quot;,&quot;hello&quot;,&quot;hello&quot;]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="用通配符-匹配任何内容"><a href="#用通配符-匹配任何内容" class="headerlink" title="用通配符.匹配任何内容"></a>用通配符.匹配任何内容</h3><p>通配符<code>.</code>将匹配任何一个字符。通配符也叫<code>dot</code>或<code>period</code>。你可以像使用正则表达式中任何其他字符一样使用通配符。例如，如果你想匹配<code>&quot;hug&quot;</code>、<code>&quot;huh&quot;</code>、<code>&quot;hut&quot;</code>和<code>&quot;hum&quot;</code>，你可以使用正则表达式<code>/hu./</code>匹配以上四个单词。以下是一个示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;aaa,aab,aac,aad&quot;</span>;<br><span class="hljs-keyword">let</span> testRegex=<span class="hljs-regexp">/aa./g</span>;<br>str.<span class="hljs-title function_">match</span>(testRegex);<span class="hljs-comment">//Return [&quot;aaa&quot;,&quot;aab&quot;,&quot;aac&quot;,&quot;aad&quot;]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="将单个字符与多种可能性匹配"><a href="#将单个字符与多种可能性匹配" class="headerlink" title="将单个字符与多种可能性匹配"></a>将单个字符与多种可能性匹配</h3><p>你可以使用<code>字符集</code>搜寻具有一定灵活性的文字匹配模式。字符集允许你通过把它们放在方括号（<code>[</code>和<code>]</code>）之间的方式来定义一组你需要匹配的字符串。例如，你想要匹配<code>&quot;bag&quot;</code>、<code>&quot;big&quot;</code>和<code>&quot;bug&quot;</code>，但是不想匹配<code>&quot;bog&quot;</code>。你可以创建正则表达式<code>/b[aiu]g/</code>来执行此操作。<code>[aiu]</code>是只匹配字符<code>&quot;a&quot;</code>、<code>&quot;i&quot;</code>或者<code>&quot;u&quot;</code>的字符集。以下是示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;bag,big,bug&quot;</span>;<br><span class="hljs-keyword">let</span> testRegex=<span class="hljs-regexp">/b[aiu]g/g</span>;<br>str.<span class="hljs-title function_">match</span>(testRegex);<span class="hljs-comment">//Return [&quot;bag&quot;,&quot;big&quot;,&quot;bug&quot;]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="匹配字母表中的字母"><a href="#匹配字母表中的字母" class="headerlink" title="匹配字母表中的字母"></a>匹配字母表中的字母</h3><p>在<code>字符集</code>中，你可以使用<code>连字符</code>（<code>-</code>）来定义要匹配的字符范围。例如，要匹配小写字母<code>a</code>到<code>e</code>，你可以使用<code>[a-e]</code>。示例如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;cat,bat,mat&quot;</span>;<br><span class="hljs-keyword">let</span> testRegex=<span class="hljs-regexp">/[b-m]at/g</span>;<br>str.<span class="hljs-title function_">match</span>(testRegex);<span class="hljs-comment">//Return [&quot;bat&quot;,&quot;cat&quot;,&quot;mat&quot;]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="匹配字母表中的数字和字母"><a href="#匹配字母表中的数字和字母" class="headerlink" title="匹配字母表中的数字和字母"></a>匹配字母表中的数字和字母</h3><p>使用连字符（<code>-</code>）匹配字符范围并不仅限于字母。它还可以匹配一系列数字。示例如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;Hello,2020&quot;</span>;<br><span class="hljs-keyword">let</span> testRegex=<span class="hljs-regexp">/[hello0-2]/gi</span>;<br>str.<span class="hljs-title function_">match</span>(testRegex);<span class="hljs-comment">//Return [&quot;H&quot;, &quot;e&quot;, &quot;l&quot;, &quot;l&quot;, &quot;o&quot;, &quot;2&quot;, &quot;0&quot;, &quot;2&quot;, &quot;0&quot;]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="匹配单个未指定的字符"><a href="#匹配单个未指定的字符" class="headerlink" title="匹配单个未指定的字符"></a>匹配单个未指定的字符</h3><p>到目前为止，你已创建了一个你想要匹配的字符集合，但你也可以创建一个你不想匹配的字符集合。这些类型的字符集称为<code>否定字符集</code>。</p>
+<p>要创建<code>否定字符集</code>，你需要在开始括号后面和不想匹配的字符前面放置<code>插入字符</code>（即<code>^</code>）。</p>
+<p>例如，<code>/[^aeiou]/gi</code>匹配所有非元音字符。注意，字符<code>.</code>、<code>!</code>、<code>[</code>、<code>@</code>、<code>/</code>和空白字符等也会被匹配，该否定字符集仅排除元音字符。示例如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;abcdefg&quot;</span>;<br><span class="hljs-keyword">let</span> testRegex=<span class="hljs-regexp">/[^a-c]/g</span>;<br>str.<span class="hljs-title function_">match</span>(testRegex);<span class="hljs-comment">//Return [&quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="匹配出现一次或多次的字符"><a href="#匹配出现一次或多次的字符" class="headerlink" title="匹配出现一次或多次的字符"></a>匹配出现一次或多次的字符</h3><p>有时，你需要匹配出现一次或者连续多次的的字符（或字符组）。你可以使用<code>+</code>符号来检查情况是否如此。记住，字符或匹配模式必须一个接一个地连续出现。</p>
+<p>例如，<code>/a+/g</code>会在<code>&quot;abc&quot;</code>中匹配到一个匹配项，并且返回<code>[&quot;a&quot;]</code>。因为<code>+</code>的存在，它也会在<code>&quot;aabc&quot;</code>中匹配到一个匹配项，然后返回<code>[&quot;aa&quot;]</code>。</p>
+<p>如果它是检查字符串<code>&quot;abab&quot;</code>，它将匹配到两个匹配项并且返回<code>[&quot;a&quot;, &quot;a&quot;]</code>，因为<code>a</code>字符不连续，在它们之间有一个<code>b</code>字符。最后，因为在字符串<code>&quot;bcd&quot;</code>中没有<code>&quot;a&quot;</code>，因此找不到匹配项。示例如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;abaabaaabbba&quot;</span>;<br><span class="hljs-keyword">let</span> testRegex=<span class="hljs-regexp">/a+/g</span>;<br>str.<span class="hljs-title function_">match</span>(testRegex);<span class="hljs-comment">//Return [&quot;a&quot;, &quot;aa&quot;, &quot;aaa&quot;, &quot;a&quot;]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="匹配出现零次或多次的字符"><a href="#匹配出现零次或多次的字符" class="headerlink" title="匹配出现零次或多次的字符"></a>匹配出现零次或多次的字符</h3><p>上一次的挑战中使用了加号<code>+</code>来查找出现一次或多次的字符。还有一个选项可以匹配出现零次或多次的字符。</p>
+<p>执行该操作的字符叫做<code>asterisk</code>或<code>star</code>，即<code>*</code>。示例如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;haaaaaaaa&quot;</span>;<br><span class="hljs-keyword">let</span> str1=<span class="hljs-string">&quot;hgggggggg&quot;</span>;<br><span class="hljs-keyword">let</span> textRegex=<span class="hljs-regexp">/ha*/</span>;<br>str.<span class="hljs-title function_">match</span>(textRegex);<span class="hljs-comment">//Return [&quot;haaaaaaaa&quot;]</span><br>str1.<span class="hljs-title function_">match</span>(textRegex);<span class="hljs-comment">//Return [&quot;h&quot;]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="用惰性匹配来查找字符"><a href="#用惰性匹配来查找字符" class="headerlink" title="用惰性匹配来查找字符"></a>用惰性匹配来查找字符</h3><p>在正则表达式中，<code>贪婪</code>匹配会匹配到符合正则表达式匹配模式的字符串的最长可能部分，并将其作为匹配项返回。另一种方案称为<code>懒惰</code>匹配，它会匹配到满足正则表达式的字符串的最小可能部分。</p>
+<p>你可以将正则表达式<code>/t[a-z]*i/</code>应用于字符串<code>&quot;titanic&quot;</code>。这个正则表达式是一个以<code>t</code>开始，以<code>i</code>结束，并且中间有一些字母的匹配模式。</p>
+<p>正则表达式默认是<code>贪婪</code>匹配，因此匹配返回为<code>[&quot;titani&quot;]</code>。它会匹配到适合该匹配模式的最大子字符串。</p>
+<p>但是，你可以使用<code>?</code>字符来将其变成<code>懒惰</code>匹配。调整后的正则表达式<code>/t[a-z]*?i/</code>匹配字符串<code>&quot;titanic&quot;</code>返回<code>[&quot;ti&quot;]</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;different&quot;</span>;<br><span class="hljs-keyword">let</span> textRegex=<span class="hljs-regexp">/d[a-z]*e/</span>;<br><span class="hljs-keyword">let</span> textRegex1=<span class="hljs-regexp">/d[a-z]*?e/</span>;<br>str.<span class="hljs-title function_">match</span>(textRegex);<span class="hljs-comment">//Return [&quot;differe&quot;]</span><br>str.<span class="hljs-title function_">match</span>(textRegex1);<span class="hljs-comment">//Return [&quot;diffe&quot;]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="在狩猎中找到一个或多个罪犯"><a href="#在狩猎中找到一个或多个罪犯" class="headerlink" title="在狩猎中找到一个或多个罪犯"></a>在狩猎中找到一个或多个罪犯</h3><p>群罪犯逃出监狱逃跑，但你不知道有多少人。但是，你知道他们和其他人在一起时会保持紧密联系。你有责任立刻找到所有的罪犯。</p>
+<p>这里有一个示例来回顾如何做到这一点：</p>
+<p>当字母<code>z</code>在一行中出现一次或连续多次时，正则表达式<code>/z+/</code>会匹配到它。它会在以下所有字符串中找到匹配项：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-string">&quot;z&quot;</span><br><span class="hljs-string">&quot;zzzzzz&quot;</span><br><span class="hljs-string">&quot;ABCzzzz&quot;</span><br><span class="hljs-string">&quot;zzzzABC&quot;</span><br><span class="hljs-string">&quot;abczzzzzzzzzzzzzzzzzzzzzabc&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>但是它不会在以下字符串中找到匹配项，因为它们中没有字母<code>z</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-string">&quot;&quot;</span><br><span class="hljs-string">&quot;ABC&quot;</span><br><span class="hljs-string">&quot;abcabc&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>编写一个<code>贪婪</code>正则表达式，在一组其他人中匹配到一个或多个罪犯。罪犯由大写字母<code>C</code>表示</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// example crowd gathering</span><br><span class="hljs-keyword">let</span> crowd = <span class="hljs-string">&#x27;P1P2P3P4P5P6CCCP7P8P9&#x27;</span>;<br><br><span class="hljs-keyword">let</span> reCriminals = <span class="hljs-regexp">/./</span>; <span class="hljs-comment">// 修改这一行</span><br><br><span class="hljs-keyword">let</span> matchedCriminals = crowd.<span class="hljs-title function_">match</span>(reCriminals);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(matchedCriminals);<br></code></pre></td></tr></table></figure>
+
+<p>示例答案：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// example crowd gathering</span><br><span class="hljs-keyword">let</span> crowd = <span class="hljs-string">&#x27;P1P2P3P4P5P6CCCP7P8P9&#x27;</span>;<br><br><span class="hljs-keyword">let</span> reCriminals = <span class="hljs-regexp">/C+/</span>; <span class="hljs-comment">// 修改这一行</span><br><br><span class="hljs-keyword">let</span> matchedCriminals = crowd.<span class="hljs-title function_">match</span>(reCriminals);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(matchedCriminals);<br></code></pre></td></tr></table></figure>
+
+<h3 id="匹配字符串的开头"><a href="#匹配字符串的开头" class="headerlink" title="匹配字符串的开头"></a>匹配字符串的开头</h3><p>你使用<code>字符集</code>中的<code>插入</code>符号（<code>^</code>）来创建一个<code>否定字符集</code>，形如<code>[^thingsThatWillNotBeMatched]</code>。在<code>字符集</code>之外，插入<code>^</code>符号用于字符串的开头搜寻匹配模式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;Hello,World&quot;</span>;<br><span class="hljs-keyword">let</span> textRegex=<span class="hljs-regexp">/^Hello/</span>;<br><span class="hljs-keyword">let</span> textRegex1=<span class="hljs-regexp">/^World/</span>;<br>textRegex.<span class="hljs-title function_">test</span>(str);<span class="hljs-comment">//true</span><br>textRegex1.<span class="hljs-title function_">test</span>(str);<span class="hljs-comment">//false</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="匹配字符串的末尾"><a href="#匹配字符串的末尾" class="headerlink" title="匹配字符串的末尾"></a>匹配字符串的末尾</h3><p>你可以使用正则表达式的<code>美元</code>符号<code>$</code>来搜寻字符串的结尾。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;hello,world&quot;</span>;<br><span class="hljs-keyword">let</span> str1=<span class="hljs-string">&quot;wold,hello&quot;</span>;<br><span class="hljs-keyword">let</span> textRegex=<span class="hljs-regexp">/world$/</span>;<br>textRegex.<span class="hljs-title function_">test</span>(str);<span class="hljs-comment">//true</span><br>textRegex.<span class="hljs-title function_">test</span>(str1);<span class="hljs-comment">//false</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="匹配所有的字母和数字"><a href="#匹配所有的字母和数字" class="headerlink" title="匹配所有的字母和数字"></a>匹配所有的字母和数字</h3><p>使用字符类，你可以使用<code>[a-z]</code>搜寻字母表中的所有字母。这种字符类是很常见的，它有一个缩写，但这个缩写也包含额外的字符。</p>
+<p>JavaScript 中与字母表匹配的最接近的字符类是<code>\w</code>，这个缩写等同于<code>[A-Za-z0-9_]</code>。它不仅可以匹配大小写字母和数字，注意，它还会匹配下划线字符（<code>_</code>）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;Hello_World2020&quot;</span>;<br><span class="hljs-keyword">let</span> testRegex=<span class="hljs-regexp">/\w+/</span>;<br>str.<span class="hljs-title function_">match</span>(testRegex);<span class="hljs-comment">//Return [&quot;Hello_World2020&quot;]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="匹配除了字母和数字的所有符号"><a href="#匹配除了字母和数字的所有符号" class="headerlink" title="匹配除了字母和数字的所有符号"></a>匹配除了字母和数字的所有符号</h3><p>你可以使用<code>\W</code>搜寻和<code>\w</code>相反的匹配模式。注意，相反匹配模式使用大写字母。此缩写与<code>[^A-Za-z0-9_]</code>是一样的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;hello,World!&quot;</span>;<br><span class="hljs-keyword">let</span> testRegex=<span class="hljs-regexp">/\W/g</span>;<br>str.<span class="hljs-title function_">match</span>(testRegex);<span class="hljs-comment">//Return [&quot;,&quot;,&quot;!&quot;]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="匹配所有数字"><a href="#匹配所有数字" class="headerlink" title="匹配所有数字"></a>匹配所有数字</h3><p>查找数字字符的缩写是<code>\d</code>，注意是小写的<code>d</code>。这等同于字符类<code>[0-9]</code>，它查找 0 到 9 之间任意数字的单个字符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;0123hello&quot;</span>;<br><span class="hljs-keyword">let</span> testRegex=<span class="hljs-regexp">/\d/g</span>;<br>str.<span class="hljs-title function_">match</span>(testRegex);<span class="hljs-comment">//Return [&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="匹配所有非数字"><a href="#匹配所有非数字" class="headerlink" title="匹配所有非数字"></a>匹配所有非数字</h3><p>查找非数字字符的缩写是<code>\D</code>。这等同于字符串<code>[^0-9]</code>，它查找不是 0 - 9 之间数字的单个字符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;hello2020world&quot;</span>;<br><span class="hljs-keyword">let</span> testRegex=<span class="hljs-regexp">/\D/g</span>;<br>str.<span class="hljs-title function_">match</span>(testRegex);<span class="hljs-comment">//Return [&quot;h&quot;, &quot;e&quot;, &quot;l&quot;, &quot;l&quot;, &quot;o&quot;, &quot;w&quot;, &quot;o&quot;, &quot;r&quot;, &quot;l&quot;, &quot;d&quot;]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="限制可能的用户名"><a href="#限制可能的用户名" class="headerlink" title="限制可能的用户名"></a>限制可能的用户名</h3><p>你需要检查数据库中的所有用户名。以下是用户在创建用户名时必须遵守的一些简单规则。</p>
+<ol>
+<li><p>用户名中的数字必须在最后，且数字可以有零个或多个。</p>
+</li>
+<li><p>用户名字母可以是小写字母和大写字母。</p>
+</li>
+<li><p>用户名长度必须至少为两个字符。两位用户名只能使用字母。</p>
+</li>
+</ol>
+<p>修改正则表达式<code>userCheck</code>以适合上面列出的约束。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> username = <span class="hljs-string">&quot;JackOfAllTrades&quot;</span>;<br><span class="hljs-keyword">let</span> userCheck = <span class="hljs-regexp">/change/</span>; <span class="hljs-comment">// 修改这一行</span><br><span class="hljs-keyword">let</span> result = userCheck.<span class="hljs-title function_">test</span>(username);<br></code></pre></td></tr></table></figure>
+
+<p>示例答案：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> username = <span class="hljs-string">&quot;JackOfAllTrades&quot;</span>;<br><span class="hljs-keyword">let</span> username1 = <span class="hljs-string">&quot;Mike666&quot;</span>;<br><span class="hljs-keyword">let</span> username2 = <span class="hljs-string">&quot;KK&quot;</span>;<br><span class="hljs-keyword">let</span> userCheck = <span class="hljs-regexp">/^[a-z]([0-9][0-9]+|[a-z]+[\d]*)$/i</span>; <span class="hljs-comment">// 修改这一行</span><br>userCheck.<span class="hljs-title function_">test</span>(username);<span class="hljs-comment">//false</span><br>userCheck.<span class="hljs-title function_">test</span>(username1);<span class="hljs-comment">//true</span><br>userCheck.<span class="hljs-title function_">test</span>(username2);<span class="hljs-comment">//true</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="匹配空白字符"><a href="#匹配空白字符" class="headerlink" title="匹配空白字符"></a>匹配空白字符</h3><p>你可以使用<code>\s</code>搜寻空格，其中<code>s</code>是小写。此匹配模式不仅匹配空格，还匹配回车符、制表符、换页符和换行符，你可以将其视为与<code>[\r\t\f\n\v]</code>类似。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;hello hello hello &quot;</span>;<br><span class="hljs-keyword">let</span> testRegex=<span class="hljs-regexp">/\s/g</span>;<br>str.<span class="hljs-title function_">match</span>(testRegex);<span class="hljs-comment">//Return  [&quot; &quot;, &quot; &quot;, &quot; &quot;]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="匹配非空白字符"><a href="#匹配非空白字符" class="headerlink" title="匹配非空白字符"></a>匹配非空白字符</h3><p>使用<code>\S</code>搜寻非空白字符，其中<code>S</code>是大写。此匹配模式将不匹配空格、回车符、制表符、换页符和换行符。你可以认为这类似于字符类<code>[^\r\t\f\n\v]</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;h h h h h&quot;</span>;<br><span class="hljs-keyword">let</span> testRegex=<span class="hljs-regexp">/\S/g</span>;<br>str.<span class="hljs-title function_">match</span>(testRegex);<span class="hljs-comment">//Return [&quot;h&quot;, &quot;h&quot;, &quot;h&quot;, &quot;h&quot;, &quot;h&quot;]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="指定匹配的上限和下限"><a href="#指定匹配的上限和下限" class="headerlink" title="指定匹配的上限和下限"></a>指定匹配的上限和下限</h3><p>你使用加号<code>+</code>查找一个或多个字符，使用星号<code>*</code>查找零个或多个字符。这些都很方便，但有时你需要匹配一定范围的匹配模式。</p>
+<p>你可以使用<code>数量说明符</code>指定匹配模式的上下限。数量说明符与花括号（<code>&#123;</code>和<code>&#125;</code>）一起使用。你可以在花括号之间放两个数字，这两个数字代表匹配模式的上限和下限。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;haaakk&quot;</span>;<br><span class="hljs-keyword">let</span> testRegex=<span class="hljs-regexp">/ha&#123;1,3&#125;/</span>;<br>str.<span class="hljs-title function_">match</span>(testRegex));<span class="hljs-comment">//Return [&quot;haaa&quot;]</span><br>str.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/ha&#123;1,2&#125;/</span>);<span class="hljs-comment">//Return [&quot;haa&quot;]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="只指定匹配的下限"><a href="#只指定匹配的下限" class="headerlink" title="只指定匹配的下限"></a>只指定匹配的下限</h3><p>你可以使用带有花括号的<code>数量说明符</code>来指定匹配模式的上下限。但有时候你只想指定匹配模式的下限而不需要指定上限。</p>
+<p>为此，在第一个数字后面跟一个逗号即可</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;haaaaa&quot;</span>;<br><span class="hljs-keyword">let</span> str1=<span class="hljs-string">&quot;haaaaaaaa&quot;</span>;<br><span class="hljs-keyword">let</span> testRegex=<span class="hljs-regexp">/ha&#123;3,&#125;/</span>;<br>str.<span class="hljs-title function_">match</span>(testRegex);<span class="hljs-comment">//Return [&quot;haaaaa&quot;]</span><br>str1.<span class="hljs-title function_">match</span>(testRegex);<span class="hljs-comment">//Return [&quot;haaaaaaaa&quot;]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="指定匹配的确切数量"><a href="#指定匹配的确切数量" class="headerlink" title="指定匹配的确切数量"></a>指定匹配的确切数量</h3><p>要指定一定数量的匹配模式，只需在大括号之间放置一个数字。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str=<span class="hljs-string">&quot;helllllllo&quot;</span>;<br><span class="hljs-keyword">let</span> testRegex=<span class="hljs-regexp">/hel&#123;3&#125;/</span>;<br>str.<span class="hljs-title function_">match</span>(testRegex);<span class="hljs-comment">//Return [&quot;helll&quot;]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="检查全部或无"><a href="#检查全部或无" class="headerlink" title="检查全部或无"></a>检查全部或无</h3><p>有时，你想要搜寻的匹配模式可能有不确定是否存在的部分。尽管如此，你还是想检查它们。</p>
+<p>为此，你可以使用问号<code>?</code>指定可能存在的元素。这将检查前面的零个或一个元素。你可以将此符号视为前面的元素是可选的</p>
+<p>例如，美式英语和英式英语略有不同，你可以使用问号来匹配两种拼写</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> american = <span class="hljs-string">&quot;color&quot;</span>;<br><span class="hljs-keyword">let</span> british = <span class="hljs-string">&quot;colour&quot;</span>;<br><span class="hljs-keyword">let</span> rainbowRegex= <span class="hljs-regexp">/colou?r/</span>;<br>rainbowRegex.<span class="hljs-title function_">test</span>(american); <span class="hljs-comment">// Returns true</span><br>rainbowRegex.<span class="hljs-title function_">test</span>(british); <span class="hljs-comment">// Returns true</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="正向先行断言和负向先行断言"><a href="#正向先行断言和负向先行断言" class="headerlink" title="正向先行断言和负向先行断言"></a>正向先行断言和负向先行断言</h3><p><code>先行断言</code>是告诉 JavaScript 在字符串中向前查找的匹配模式。当你想要在同一个字符串上搜寻多个匹配模式时，这可能非常有用。</p>
+<p>有两种<code>先行断言</code>：<code>正向先行断言</code>和<code>负向先行断言</code>。</p>
+<p><code>正向先行断言</code>会查看并确保搜索匹配模式中的元素存在，但实际上并不匹配。正向先行断言的用法是<code>(?=...)</code>，其中<code>...</code>就是需要存在但不会被匹配的部分。</p>
+<p>另一方面，<code>负向先行断言</code>会查看并确保搜索匹配模式中的元素不存在。负向先行断言的用法是<code>(?!...)</code>，其中<code>...</code>是你希望不存在的匹配模式。如果负向先行断言部分不存在，将返回匹配模式的其余部分</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> quit = <span class="hljs-string">&quot;qu&quot;</span>;<br><span class="hljs-keyword">let</span> noquit = <span class="hljs-string">&quot;qt&quot;</span>;<br><span class="hljs-keyword">let</span> quRegex= <span class="hljs-regexp">/q(?=u)/</span>;<br><span class="hljs-keyword">let</span> qRegex = <span class="hljs-regexp">/q(?!u)/</span>;<br>quit.<span class="hljs-title function_">match</span>(quRegex); <span class="hljs-comment">// Returns [&quot;q&quot;]</span><br>noquit.<span class="hljs-title function_">match</span>(qRegex); <span class="hljs-comment">// Returns [&quot;q&quot;]</span><br></code></pre></td></tr></table></figure>
+
+<p><code>先行断言</code>的更实际用途是检查一个字符串中的两个或更多匹配模式。这里有一个简单的密码检查器，密码规则是 3 到 6 个字符且至少包含一个数字：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> password = <span class="hljs-string">&quot;abc123&quot;</span>;<br><span class="hljs-keyword">let</span> checkPass = <span class="hljs-regexp">/(?=\w&#123;3,6&#125;)(?=\D*\d)/</span>;<br>checkPass.<span class="hljs-title function_">test</span>(password); <span class="hljs-comment">// Returns true</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="使用捕获组重用模式"><a href="#使用捕获组重用模式" class="headerlink" title="使用捕获组重用模式"></a>使用捕获组重用模式</h3><p>一些你所搜寻的匹配模式会在字符串中出现多次，手动重复该正则表达式太浪费了。有一种更好的方法可以指定何时在字符串中会有多个重复的子字符串。</p>
+<p>你可以使用<code>捕获组</code>搜寻重复的子字符串。括号<code>(</code>和<code>)</code>可以用来匹配重复的子字符串。你只需要把重复匹配模式的正则表达式放在括号中即可。</p>
+<p>要指定重复字符串将出现的位置，可以使用反斜杠（<code>\</code>）后接一个数字。这个数字从 1 开始，随着你使用的每个捕获组的增加而增加。这里有一个示例，<code>\1</code>可以匹配第一个组。</p>
+<p>下面的示例匹配任意两个被空格分割的单词：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> repeatStr = <span class="hljs-string">&quot;regex regex&quot;</span>;<br><span class="hljs-keyword">let</span> repeatRegex = <span class="hljs-regexp">/(\w+)\s\1/</span>;<br>repeatRegex.<span class="hljs-title function_">test</span>(repeatStr); <span class="hljs-comment">// Returns true</span><br>repeatStr.<span class="hljs-title function_">match</span>(repeatRegex); <span class="hljs-comment">// Returns [&quot;regex regex&quot;, &quot;regex&quot;]</span><br></code></pre></td></tr></table></figure>
+
+<p>在字符串上使用<code>.match()</code>方法将返回一个数组，其中包含它匹配的字符串及其捕获组</p>
+<h3 id="使用捕获组搜索和替换"><a href="#使用捕获组搜索和替换" class="headerlink" title="使用捕获组搜索和替换"></a>使用捕获组搜索和替换</h3><p>搜索功能是很有用的。但是，当你的搜索也执行更改（或替换）匹配文本的操作时，搜索功能就会显得更加强大。</p>
+<p>可以使用字符串上<code>.replace()</code>方法来搜索并替换字符串中的文本。<code>.replace()</code>的输入首先是你想要搜索的正则表达式匹配模式，第二个参数是用于替换匹配的字符串或用于执行某些操作的函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> wrongText = <span class="hljs-string">&quot;The sky is silver.&quot;</span>;<br><span class="hljs-keyword">let</span> silverRegex = <span class="hljs-regexp">/silver/</span>;<br>wrongText.<span class="hljs-title function_">replace</span>(silverRegex, <span class="hljs-string">&quot;blue&quot;</span>);<br><span class="hljs-comment">// Returns &quot;The sky is blue.&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>你还可以使用美元符号（<code>$</code>）访问替换字符串中的捕获组。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-string">&quot;Code Camp&quot;</span>.<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/(\w+)\s(\w+)/</span>, <span class="hljs-string">&#x27;$2 $1&#x27;</span>);<br><span class="hljs-comment">// Returns &quot;Camp Code&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="删除开头和结尾的空白"><a href="#删除开头和结尾的空白" class="headerlink" title="删除开头和结尾的空白"></a>删除开头和结尾的空白</h3><p>编写一个正则表达式并使用适当的字符串方法删除字符串开头和结尾的空格。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> hello = <span class="hljs-string">&quot;   Hello, World!  &quot;</span>;<br><span class="hljs-keyword">let</span> wsRegex = <span class="hljs-regexp">/^\s+|\s+$/g</span>; <br><span class="hljs-keyword">let</span> result = hello.<span class="hljs-title function_">replace</span>(wsRegex, <span class="hljs-string">&quot;&quot;</span>);<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/788c0b90.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">let和var的区别</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/d3aa53cc.html">
+                        <span class="hidden-mobile">建站知识一</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "318k63s8cJRgAN920zz8Rd7w-gzGzoHsz",
+          app_key: "Eh7Uk7TMvw3Y5DbAzmIzIEYO",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "https://318k63s8.lc-cn-n1-shared.com",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"  style="display:block; overflow:hidden; width:80px; margin: 0 auto; " > <img src="/images/yplogo.png" srcset="/img/loading.gif" style="width:100%;border-radius:8px"> </a> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
